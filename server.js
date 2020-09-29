@@ -13,9 +13,11 @@ server.use(cors());
 
 //Routes files
 const register = require("./routes/register");
+const login = require("./routes/login");
 
 //Routes setup
 server.use("/api/register", register);
+server.use("/api/login", login);
 
 //Error handler
 server.use(errorHandler);
