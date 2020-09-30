@@ -31,7 +31,9 @@ exports.readings = asyncHandler(async (req, res, next) => {
       .execute("SP_SAVE_LOG");
   }
 
-  return res.send(request);
+  return res.status(200).json({
+    data: request.recordset,
+  });
 });
 
 //@desc     get records
@@ -81,7 +83,9 @@ exports.readindsByDate = asyncHandler(async (req, res, next) => {
       .execute("SP_SAVE_LOG");
   }
 
-  return res.send(request);
+  return res.status(200).json({
+    data: request.recordset,
+  });
 });
 
 const queryHeader = (type, next) => {
