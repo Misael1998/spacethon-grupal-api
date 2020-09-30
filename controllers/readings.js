@@ -24,6 +24,13 @@ exports.readings = asyncHandler(async (req, res, next) => {
 
   const request = await new db.Request().query(query);
 
+  for (record of request.recordset) {
+    const logs = await new db.Request()
+      .input("user", db.Int, record.id)
+      .input("reading", db.Int, req.user.id)
+      .execute("SP_SAVE_LOG");
+  }
+
   return res.send(request);
 });
 
@@ -66,6 +73,13 @@ exports.readindsByDate = asyncHandler(async (req, res, next) => {
   console.log(query);
 
   let request = await new db.Request().query(query);
+
+  for (record of request.recordset) {
+    const logs = await new db.Request()
+      .input("user", db.Int, record.id)
+      .input("reading", db.Int, req.user.id)
+      .execute("SP_SAVE_LOG");
+  }
 
   return res.send(request);
 });

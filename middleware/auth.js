@@ -15,7 +15,7 @@ module.exports = (req, res, next) => {
   try {
     const decoded = jwt.decode(token, process.env.JWT_SECRET);
     const user = {
-      id: decoded.id,
+      id: decoded.user,
       role: decoded.role,
     };
 
