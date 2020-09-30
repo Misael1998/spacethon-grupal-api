@@ -58,10 +58,12 @@ exports.readindsByDate = asyncHandler(async (req, res, next) => {
 
   let query = queryHeader(type, next);
   query += `
-  where fecha_medicion between ${dateFormat[0].replace(
+  where fecha_medicion between '${dateFormat[0].replace(
     /\./g,
     "/"
-  )} and ${dateFormat[1].replace(/\./g, "/")}`;
+  )}' and '${dateFormat[1].replace(/\./g, "/")}'`;
+
+  console.log(query);
 
   let request = await new db.Request().query(query);
 
@@ -72,7 +74,7 @@ const queryHeader = (type, next) => {
   let query;
   switch (type) {
     case "temperature":
-      query = `select fecha_medicion as date, 
+      query = `select top(20) fecha_medicion as date, 
       id_mediciones as id,
       ${TEMPERATURE_VALUE} as temperature 
       from ${TBL_TEMPERATURE} tp
@@ -81,7 +83,7 @@ const queryHeader = (type, next) => {
       break;
 
     case "pressure":
-      query = `select fecha_medicion as date, 
+      query = `select top(20) fecha_medicion as date, 
       id_mediciones as id,
       ${PRESSURE_VAUE} as pressure 
       from ${TBL_PRESSURE} pr
@@ -90,7 +92,7 @@ const queryHeader = (type, next) => {
       break;
 
     case "river":
-      query = `select fecha_medicion as date, 
+      query = `select top(20) fecha_medicion as date, 
       id_mediciones as id,
       ${RIVER_VALUE} as river 
       from ${TBL_RIVER} rv
@@ -99,7 +101,7 @@ const queryHeader = (type, next) => {
       break;
 
     case "precipitation":
-      query = `select fecha_medicion as date, 
+      query = `select top(20) fecha_medicion as date, 
       id_mediciones as id,
       ${PRECIPITATION_VALUE} as precipitation 
       from ${TBL_PRECIPITATION} pr
@@ -108,7 +110,7 @@ const queryHeader = (type, next) => {
       break;
 
     case "flow":
-      query = `select fecha_medicion as date, 
+      query = `select top(20) fecha_medicion as date, 
       id_mediciones as id,
       ${FLOW_VALUE} as flow from 
       ${TBL_FLOW} fl
