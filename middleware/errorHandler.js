@@ -6,6 +6,7 @@ const errorHandler = (err, req, res, next) => {
 
   //Log err
   console.log(err);
+  let unUsed = new Error(err);
   error = new ErrorResponse(err.message, err.code, err.body);
   //Handle db errors
   if (err.name == "RequestError") {
