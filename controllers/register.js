@@ -14,7 +14,7 @@ exports.register = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse("Bad request", 500, errors.array()));
   }
 
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, institution } = req.body;
 
   //Insert into db
   const salt = await bcrypt.genSalt(10);
@@ -24,6 +24,7 @@ exports.register = asyncHandler(async (req, res, next) => {
     .input("firstName", db.VarChar(100), firstName)
     .input("lastName", db.VarChar(100), lastName)
     .input("email", db.VarChar(500), email)
+    .input("institution", db.VarChar(100), institution)
     .input("password", db.VarChar(db.MAX), encriptedPassword)
     .input("role", db.VarChar(100), "user")
     .output("status", db.VarChar(1))
