@@ -41,7 +41,7 @@ Esta implementado:
 
 #### **GET** _/api/readings/:type_
 
-El acceso a esa ruta es de tipo privado, por esta razon necesita envial el token de authenticacion en el encabezado.
+El acceso a esa ruta es de tipo privado, por esta razón necesita enviar el token de autenticación en el encabezado.
 
 ```
     auth-token: <token>

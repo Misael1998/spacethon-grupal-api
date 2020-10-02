@@ -12,8 +12,8 @@ const TBL_FLOW = "TBL_CAUDAL";
 const TEMPERATURE_VALUE = "temperatura";
 const PRESSURE_VAUE = "presion_atmosferica";
 const RIVER_VALUE = "altura_rio";
-const PRECIPITATION_VALUE = "caudal";
-const FLOW_VALUE = "precipitacion";
+const PRECIPITATION_VALUE = "precipitacion";
+const FLOW_VALUE = "caudal";
 
 //@desc     get records
 //@route    GET /api/readings/:type
@@ -26,8 +26,8 @@ exports.readings = asyncHandler(async (req, res, next) => {
 
   for (record of request.recordset) {
     const logs = await new db.Request()
-      .input("user", db.Int, record.id)
-      .input("reading", db.Int, req.user.id)
+      .input("user", db.Int, req.user.id)
+      .input("reading", db.Int, record.id)
       .execute("SP_SAVE_LOG");
   }
 
@@ -78,8 +78,8 @@ exports.readindsByDate = asyncHandler(async (req, res, next) => {
 
   for (record of request.recordset) {
     const logs = await new db.Request()
-      .input("user", db.Int, record.id)
-      .input("reading", db.Int, req.user.id)
+      .input("user", db.Int, req.user.id)
+      .input("reading", db.Int, record.id)
       .execute("SP_SAVE_LOG");
   }
 
