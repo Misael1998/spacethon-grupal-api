@@ -26,5 +26,6 @@ server.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
+  console.log("Making test");
   console.log(`server running on ${process.env.PORT}`);
 });
